@@ -11,9 +11,17 @@
 .@{notificationPrefixCls} {
   position: fixed;
   z-index: 1000;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  max-width: 300px;
+
+  &-content{
+    padding-left: 34px;
+    font-size: 14px;
+  }
 
   &-notice {
-    padding: 7px 20px 7px 10px;
+    padding: 10px 20px 10px 10px;
     border-radius: 3px 3px;
     border: 1px solid #999;;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -56,6 +64,31 @@
       }
     }
   }
+
+  .kuma-icon {
+    font-size: 24px;
+    margin-right: 10px;
+    line-height: 1;
+    float: left;
+    vertical-align: middle;
+    
+    &.kuma-icon-caution {
+      color: @brand-warning;
+    }
+    &.kuma-icon-information {
+      color: @brand-primary;
+    }
+    &.kuma-icon-success {
+      color: @brand-success;
+    }
+    &.kuma-icon-error {
+      color: @brand-danger;
+    }
+  }
+  .kuma-loading {
+    float: left;
+  }
+
 
   .fade-effect() {
     animation-duration: 0.3s;

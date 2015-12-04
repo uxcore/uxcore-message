@@ -1,15 +1,17 @@
 let Notification = require('rc-notification');
+let classnames = require('classnames');
 let defaultDuration = 1.5;
-let top;
 let messageInstance;
 let key = 1;
+let prefixCls = 'kuma-message';
+let transitionName = 'move-up';
 
 function getMessageInstance() {
   messageInstance = messageInstance || Notification.newInstance({
-    prefixCls: 'kuma-message',
-    transitionName: 'move-up',
+    prefixCls: prefixCls,
+    transitionName: transitionName,
     style: {
-      top: top
+      left: '50%'
     }  // 覆盖原来的样式
   });
   return messageInstance;
@@ -20,7 +22,7 @@ function notice(content, duration = defaultDuration, type, onClose) {
     'info': 'kuma-icon kuma-icon-information',
     'success': 'kuma-icon kuma-icon-success',
     'error': 'kuma-icon kuma-icon-error',
-    'loading': 'kuma-loading-s'
+    'loading': 'kuma-loading'
   })[type];
 
   let instance = getMessageInstance();
@@ -28,9 +30,12 @@ function notice(content, duration = defaultDuration, type, onClose) {
     key: key,
     duration: duration,
     style: {},
-    content: <div className="ant-message-custom-content">
+    content: <div className={classnames({
+                [`${prefixCls}-container ${prefixCls}-container-${type}`]: true,
+                'fn-clear': true
+            })}>
       <i className={iconClass}></i>
-      <span>{content}</span>
+      <div className={prefixCls + '-content'}>{content}</div>
     </div>,
     onClose: onClose
   });
@@ -56,8 +61,7 @@ module.exports = {
     return notice(content, duration, 'loading', onClose);
   },
   config(options) {
-    if (options.top) {
-      top = options.top;
-    }
+    prefixCls = options.prefixCls || prefixCls;
+    transitionName = options.transitionName || transitionName;
   }
 };
