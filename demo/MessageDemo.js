@@ -20,7 +20,7 @@ class Demo extends React.Component {
     }
 
     handleClick(type) {
-        Message[type]('引用该附件模板引用该附件模板', 20)
+        Message[type](type, 20)
     }
 
     render() {
