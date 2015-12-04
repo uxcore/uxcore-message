@@ -29,7 +29,7 @@ function notice(content, duration = defaultDuration, type, onClose) {
   instance.notice({
     key: key,
     duration: duration,
-    style: {},
+    style: {right: '50%'},
     content: <div className={classnames({
                 [`${prefixCls}-container ${prefixCls}-container-${type}`]: true,
                 'fn-clear': true
