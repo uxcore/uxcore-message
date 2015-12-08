@@ -5,10 +5,12 @@ let messageInstance;
 let key = 1;
 let prefixCls = 'kuma-message';
 let transitionName = 'move-up';
+let className;
 
 function getMessageInstance() {
   messageInstance = messageInstance || Notification.newInstance({
     prefixCls: prefixCls,
+    className: className,
     transitionName: transitionName,
     style: {
       left: '50%'
@@ -63,5 +65,6 @@ module.exports = {
   config(options) {
     prefixCls = options.prefixCls || prefixCls;
     transitionName = options.transitionName || transitionName;
+    className = options.className || className;
   }
 };

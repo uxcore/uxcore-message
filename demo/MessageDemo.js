@@ -25,6 +25,9 @@ class Demo extends React.Component {
 
     render() {
         let me = this;
+        Message.config({
+            className: 'xxx'
+        })
         return (
             <div>
                 <Button onClick={me.handleClick.bind(me, 'success')}>显示成功提示</Button>
