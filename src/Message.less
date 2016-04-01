@@ -6,131 +6,86 @@
  * All rights reserved.
  */
 
-@notificationPrefixCls: kuma-message;
+@__notificationPrefixCls: kuma-message;
 
-.@{notificationPrefixCls} {
-  top: 16px;
-  position: fixed;
-  z-index: 1000;
-  max-width: 300px;
+.@{__notificationPrefixCls} {
+    top: 16px;
+    position: fixed;
+    z-index: 1000;
+    max-width: 300px;
 
-  &-content{
-    padding-left: 34px;
-    font-size: 14px;
-  }
-
-  &-notice {
-    padding: 10px 20px 10px 10px;
-    border-radius: 3px 3px;
-    border: 1px solid #999;;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border: 0px solid rgba(0, 0, 0, 0);;
-    background: #fff;
-    display: block;
-    width: auto;
-    line-height: 1.5;
-    vertical-align: middle;
-    position: relative;
-    margin: 10px 0;
-
-    &-closable {
-      padding-right: 20px;
+    &-content {
+        margin-left: 34px;
+        font-size: 14px;
+        color: @text-primary-color;
+        line-height: 24px;
     }
 
-    &-close {
-      position: absolute;
-      right: 5px;
-      top: 3px;
-      color: #000;
-      cursor: pointer;
-      outline: none;
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 1;
-      text-shadow: 0 1px 0 #fff;
-      filter: alpha(opacity=20);
-      opacity: .2;
-      text-decoration: none;
+    &-notice {
+        position: relative;
+        margin: 10px 0;
+        padding: 20px 30px;
+        border-radius: @global-border-radius;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+        border: 1px solid @border-color;
+        background: #fff;
+        line-height: 1.5;
 
-      &-x:after {
-        content: '×';
-      }
+        &-closable {
+            padding-right: 20px;
+        }
 
-      &:hover {
-        opacity: 1;
-        filter: alpha(opacity=100);
-        text-decoration: none;
-      }
+        &-close {
+            position: absolute;
+            right: 5px;
+            top: 3px;
+            color: #000;
+            cursor: pointer;
+            outline: none;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1;
+            text-shadow: 0 1px 0 #fff;
+            filter: alpha(opacity=20);
+            opacity: .2;
+            text-decoration: none;
+
+            &-x:after {
+                content: '×';
+            }
+
+            &:hover {
+                opacity: 1;
+                filter: alpha(opacity=100);
+                text-decoration: none;
+            }
+        }
     }
-  }
 
-  .kuma-icon {
-    font-size: 24px;
-    margin-right: 10px;
-    line-height: 1;
-    float: left;
-    vertical-align: middle;
-    
-    &.kuma-icon-caution {
-      color: @brand-warning;
+    .kuma-icon {
+        float: left;
+        margin-right: 10px;
+        font-size: 24px;
+        line-height: 1;
+
+        &.kuma-icon-caution {
+            color: @brand-warning;
+        }
+        &.kuma-icon-information {
+            color: @brand-primary;
+        }
+        &.kuma-icon-success {
+            color: @brand-success;
+        }
+        &.kuma-icon-error {
+            color: @brand-danger;
+        }
     }
-    &.kuma-icon-information {
-      color: @brand-primary;
+    .kuma-loading {
+        float: left;
+        & + .@{__notificationPrefixCls}-content {
+            margin-left: 46px;
+            line-height: 36px;
+        }
     }
-    &.kuma-icon-success {
-      color: @brand-success;
-    }
-    &.kuma-icon-error {
-      color: @brand-danger;
-    }
-  }
-  .kuma-loading {
-    float: left;
-  }
-
-
-  .fade-effect() {
-    animation-duration: 0.3s;
-    animation-fill-mode: both;
-    animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
-  }
-
-  &-fade-enter {
-    opacity: 0;
-    .fade-effect();
-    animation-play-state: paused;
-  }
-
-  &-fade-leave {
-    .fade-effect();
-    animation-play-state: paused;
-  }
-
-  &-fade-enter&-fade-enter-active {
-    animation-name: rcNotificationFadeIn;
-    animation-play-state: running;
-  }
-
-  &-fade-leave&-fade-leave-active {
-    animation-name: rcDialogFadeOut;
-    animation-play-state: running;
-  }
-
-  @keyframes rcNotificationFadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @keyframes rcDialogFadeOut {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
 }
