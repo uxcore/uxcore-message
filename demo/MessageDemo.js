@@ -20,14 +20,11 @@ class Demo extends React.Component {
     }
 
     handleClick(type) {
-        Message[type](type, 20)
+        Message[type](type, 10)
     }
 
     render() {
         let me = this;
-        Message.config({
-            className: 'xxx'
-        })
         return (
             <div>
                 <Button onClick={me.handleClick.bind(me, 'success')}>显示成功提示</Button>
