@@ -1,3 +1,11 @@
+# 0.2.4
+
+`CHANGED` update dependency `uxcore-kuma` & `kuma-base`
+
+# 0.2.3
+
+`CHANGED` change the default layout
+
 # 0.2.2
 
 `CHANGED` change default transitionName 
