@@ -5,6 +5,7 @@ let messageInstance;
 let key = 1;
 let prefixCls = 'kuma-message';
 let transitionName = 'moveUp';
+const React = require('react');
 let className;
 
 function getMessageInstance() {
