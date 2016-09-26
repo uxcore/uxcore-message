@@ -1,3 +1,8 @@
+# 0.2.5
+
+`FIXED` missing react import
+`CHANGED` new scaffold
+
 # 0.2.4
 
 `CHANGED` update dependency `uxcore-kuma` & `kuma-base`
