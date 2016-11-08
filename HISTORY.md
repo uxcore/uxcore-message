@@ -1,3 +1,7 @@
+# 0.2.6
+
+`CHANGED` change `z-index` to 1070
+
 # 0.2.5
 
 `FIXED` missing react import
