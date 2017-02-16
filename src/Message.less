@@ -90,3 +90,56 @@
         }
     }
 }
+
+@keyframes msgMoveUpIn {
+    0% {
+        transform-origin: 0 0;
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform-origin: 0 0;
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes msgMoveUpOut {
+    0% {
+        transform-origin: 0 0;
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform-origin: 0 0;
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+.message-moveUp-enter,
+.message-moveUp-appear {
+    transform-origin: 0 0;
+    transform: translateY(100%);
+    opacity: 0;
+    animation-timing-function: @transition-ease;
+    animation-duration: .3s;
+}
+.message-moveUp-enter-active,
+.message-moveUp-appear-active {
+     animation-name: msgMoveUpIn;
+}
+
+.message-moveUp-leave {
+    transform-origin: 0 0;
+    transform: translateY(0);
+    opacity: 1;
+    animation-timing-function: @transition-ease;
+    animation-duration: .3s;
+}
+
+.message-moveUp-leave-active {
+    animation-name: msgMoveUpOut;
+}

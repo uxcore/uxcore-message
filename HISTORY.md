@@ -1,3 +1,7 @@
+# 0.3.0
+
+`CHANGED` new animation
+
 # 0.2.6
 
 `CHANGED` change `z-index` to 1070
