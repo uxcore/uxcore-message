@@ -17,7 +17,7 @@ class Demo extends React.Component {
     /*
     // test issue #14
     Message.config({
-      multiple: false,
+      multipleInstance: false,
     });
     */
   }

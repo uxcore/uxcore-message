@@ -8,7 +8,7 @@ let key = 1;
 let prefixCls = 'kuma-message';
 let transitionName = 'message-moveUp';
 let className;
-let multiple = true;
+let multipleInstance = true;
 
 
 function createMessageInstance() {
@@ -33,7 +33,7 @@ function notice(content, duration = defaultDuration, type, onClose) {
     error: 'kuma-icon kuma-icon-error',
     loading: 'kuma-loading',
   })[type];
-  const instance = multiple && messageInstance ? messageInstance : createMessageInstance();
+  const instance = multipleInstance && messageInstance ? messageInstance : createMessageInstance();
   instance.notice({
     key,
     duration,
@@ -85,7 +85,7 @@ module.exports = {
       prefixCls = options.prefixCls || prefixCls;
       transitionName = options.transitionName || transitionName;
       className = options.className || className;
-      multiple = options.multiple !== false;
+      multipleInstance = options.multipleInstance !== false;
     }
   },
 };
