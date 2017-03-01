@@ -1,3 +1,7 @@
+# 0.3.1
+
+`NEW` add new props `getContainer`
+
 # 0.3.0
 
 `CHANGED` new animation

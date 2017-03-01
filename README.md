@@ -31,13 +31,14 @@ http://uxcore.github.io/
 |---|---|---|---|---|
 |content|React.Element or String|required|-|提示的内容|
 |duration|Number|optional|1.5|多长(秒)时间消失|
+|getContainer|function|optional| - | 为 message 指定要渲染的容器 |
 
 另外提供了一个全局方法用于配置 
 
 ```js
 Message.config({
 	className: 'xxx',  // 在 uxcore-kuma 样式基础上定制时使用
-	prefixCls: 'xxx'  // 类名前缀，不想使用 uxcore-kuma 样式时使用
+	prefixCls: 'xxx',  // 类名前缀，不想使用 uxcore-kuma 样式时使用
 })
 ```
 

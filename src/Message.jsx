@@ -1,6 +1,7 @@
 const Notification = require('rc-notification');
 const classnames = require('classnames');
 const React = require('react');
+const ReactDOM = require('react-dom');
 
 const defaultDuration = 1.5;
 let messageInstance;
@@ -8,12 +9,41 @@ let key = 1;
 let prefixCls = 'kuma-message';
 let transitionName = 'message-moveUp';
 let className;
+let getContainer;
+
+Notification.newInstance = function newNotificationInstance(properties) {
+  const { getContainer, ...props } = properties || {};
+  let div;
+  if (getContainer) {
+    div = getContainer();
+  } else {
+    div = document.createElement('div');
+    document.body.appendChild(div);
+  }
+  /* eslint-disable react/no-render-return-value */
+  const notification = ReactDOM.render(<Notification {...props} />, div);
+  /* eslint-enable react/no-render-return-value */
+  return {
+    notice(noticeProps) {
+      notification.add(noticeProps);
+    },
+    removeNotice(index) {
+      notification.remove(index);
+    },
+    component: notification,
+    destroy() {
+      ReactDOM.unmountComponentAtNode(div);
+      document.body.removeChild(div);
+    },
+  };
+};
 
 function getMessageInstance() {
   messageInstance = messageInstance || Notification.newInstance({
     prefixCls,
     className,
     transitionName,
+    getContainer,
     style: {
       left: '50%',
     }, // 覆盖原来的样式
@@ -77,5 +107,6 @@ module.exports = {
     prefixCls = options.prefixCls || prefixCls;
     transitionName = options.transitionName || transitionName;
     className = options.className || className;
+    getContainer = options.getContainer;
   },
 };
