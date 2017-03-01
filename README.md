@@ -26,6 +26,7 @@ http://uxcore.github.io/
 * Message.error(content, duration)
 * Message.info(content, duration)
 * Message.loading(content, duration)
+* Message.clear()
 
 | 参数 | 类型 | 必填 | 默认值 | 功能/备注 |
 |---|---|---|---|---|
@@ -36,6 +37,7 @@ http://uxcore.github.io/
 
 ```js
 Message.config({
+  multipleInstance: true,  // 是否允许同时展示多个 message, 默认为 true
 	className: 'xxx',  // 在 uxcore-kuma 样式基础上定制时使用
 	prefixCls: 'xxx'  // 类名前缀，不想使用 uxcore-kuma 样式时使用
 })
