@@ -1,6 +1,8 @@
 # 0.3.1
 
 `NEW` add new props `getContainer`
+`NEW` add new props `multipleInstance`
+`NEW` add new API `clear()`
 
 # 0.3.0
 

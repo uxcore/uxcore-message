@@ -1,6 +1,6 @@
 {
  "name": "uxcore-message",
- "version": "0.3.0",
+ "version": "0.3.1",
  "description": "uxcore-message component for uxcore.",
  "repository": "https://github.com/uxcore/uxcore-message.git",
  "author": "eternaslky",
@@ -45,7 +45,7 @@
  "dependencies": {
   "classnames": "^2.1.2",
   "object-assign": "^4.0.0",
-  "rc-notification": "~1.2.0"
+  "rc-notification": "~1.4.0"
  },
  "contributors": [],
  "license": "MIT"

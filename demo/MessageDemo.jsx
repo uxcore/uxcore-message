@@ -7,9 +7,8 @@
  */
 
 const React = require('react');
-
-const Message = require('../src');
 const Button = require('uxcore-button');
+const Message = require('../src');
 
 Message.config({
   getContainer: () => {
@@ -18,7 +17,9 @@ Message.config({
     document.body.appendChild(div);
     return div;
   },
+  // multipleInstance: false,
 });
+
 
 class Demo extends React.Component {
 
@@ -40,6 +41,7 @@ class Demo extends React.Component {
         <Button onClick={me.handleClick.bind(me, 'info')}>显示普通提示</Button>
         <Button onClick={me.handleClick.bind(me, 'error')}>显示错误提示</Button>
         <Button onClick={me.handleClick.bind(me, 'loading')}>显示加载提示</Button>
+        <Button onClick={me.handleClick.bind(me, 'clear')}>清除</Button>
       </div>
     );
   }
