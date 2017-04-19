@@ -1,8 +1,15 @@
+
+# 0.4.0
+
+* `CHANGED` new icon 
+* `CHANGED` support small size
+* `CHANGED` a new way to pass instance options
+
 # 0.3.1
 
-`NEW` add new props `getContainer`
-`NEW` add new props `multipleInstance`
-`NEW` add new API `clear()`
+* `NEW` add new props `getContainer`
+* `NEW` add new props `multipleInstance`
+* `NEW` add new API `clear()`
 
 # 0.3.0
 

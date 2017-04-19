@@ -22,11 +22,22 @@ http://uxcore.github.io/
 
 ## API
 
-* Message.success(content, duration)
-* Message.error(content, duration)
-* Message.info(content, duration)
-* Message.loading(content, duration)
+* Message.success(content, duration, onClose)
+* Message.error(content, duration, onClose)
+* Message.info(content, duration, onClose)
+* Message.loading(content, duration, onClose)
 * Message.clear() // 清楚所有的 message。
+
+### 也可以这样进行传参
+
+```javascript
+Message.success({
+	content: 'xxx',
+	duration: 1.5,
+	onClose: () => {}
+})
+```
+
 
 | 参数 | 类型 | 必填 | 默认值 | 功能/备注 |
 |---|---|---|---|---|

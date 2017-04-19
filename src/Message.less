@@ -16,19 +16,18 @@
     max-width: 300px;
 
     &-content {
-        margin-left: 34px;
+        margin-left: 30px;
         font-size: 14px;
-        color: @text-primary-color;
+        color: @normal-alpha-2;
         line-height: 24px;
     }
 
     &-notice {
         position: relative;
         margin: 10px 0;
-        padding: 20px 30px;
+        padding: 23px 38px;
         border-radius: @global-border-radius;
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-        border: 1px solid @border-color;
+        box-shadow: @box-shadow-3;
         background: #fff;
         line-height: 1.5;
 
@@ -63,31 +62,56 @@
         }
     }
 
-    .kuma-icon {
+    .kuma-icon,
+    .uxcore-icon {
         float: left;
-        margin-right: 10px;
         font-size: 24px;
         line-height: 1;
 
         &.kuma-icon-caution {
             color: @brand-warning;
         }
-        &.kuma-icon-information {
-            color: @brand-primary;
+        &.kuma-icon-information,
+        &.uxicon-tishi-full {
+            color: @brand-info;
         }
-        &.kuma-icon-success {
+        &.kuma-icon-success,
+        &.uxicon-chenggong-full {
             color: @brand-success;
         }
-        &.kuma-icon-error {
+        &.kuma-icon-error,
+        &.uxicon-biaodanlei-tongyongqingchu {
             color: @brand-danger;
+        }
+        &.uxicon-loading-icon-round {
+            color: @brand-primary;
+            animation: msgIconRotate 1s infinite linear;
         }
     }
     .kuma-loading {
+        width: 24px;
+        height: 24px;
         float: left;
-        & + .@{__notificationPrefixCls}-content {
-            margin-left: 46px;
-            line-height: 36px;
+    }
+    &-small {
+        padding: 12px 24px;
+        .@{__notificationPrefixCls}-content {
+            font-size: 12px;
+            line-height: 16px;
+            margin-left: 24px;
         }
+        .uxcore-icon {
+            font-size: 16px;
+        }
+    }
+}
+
+@keyframes msgIconRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }
 

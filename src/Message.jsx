@@ -10,6 +10,7 @@ let transitionName = 'message-moveUp';
 let className;
 let getContainer;
 let multipleInstance = true;
+let size = 'small';
 
 function createMessageInstance() {
   if (messageInstance && messageInstance.destroy) {
@@ -28,16 +29,20 @@ function createMessageInstance() {
 }
 
 function notice(content, duration = defaultDuration, type, onClose) {
+  const options = typeof content === 'object' ? content : null;
   const iconClass = ({
-    info: 'kuma-icon kuma-icon-information',
-    success: 'kuma-icon kuma-icon-success',
-    error: 'kuma-icon kuma-icon-error',
-    loading: 'kuma-loading',
+    info: 'uxcore-icon uxicon-tishi-full',
+    success: 'uxcore-icon uxicon-chenggong-full',
+    error: 'uxcore-icon uxicon-biaodanlei-tongyongqingchu',
+    loading: 'uxcore-icon uxicon-loading-icon-round',
+    nw_loading: 'kuma-loading',
   })[type];
-  const instance = multipleInstance && messageInstance ? messageInstance : createMessageInstance();
+  const instance = (multipleInstance && messageInstance)
+    ? messageInstance : createMessageInstance(options);
   instance.notice({
     key,
-    duration,
+    duration: options ? options.duration : duration,
+    className: options ? options.className : null,
     style: {
       right: '50%',
     },
@@ -50,11 +55,11 @@ function notice(content, duration = defaultDuration, type, onClose) {
       >
         <i className={iconClass} />
         <div className={`${prefixCls}-content`}>
-          {content}
+          {options ? options.content : content}
         </div>
       </div>
     ),
-    onClose,
+    onClose: options ? options.onClose : onClose,
   });
   return (function () {
     const target = key;
@@ -65,19 +70,15 @@ function notice(content, duration = defaultDuration, type, onClose) {
   }());
 }
 
+const methods = {};
+
+['info', 'success', 'error', 'loading', 'nw_loading'].forEach((item) => {
+  methods[item] = (content, duration, onClose) =>
+    notice(content, duration, item, onClose);
+});
+
 module.exports = {
-  info(content, duration, onClose) {
-    return notice(content, duration, 'info', onClose);
-  },
-  success(content, duration, onClose) {
-    return notice(content, duration, 'success', onClose);
-  },
-  error(content, duration, onClose) {
-    return notice(content, duration, 'error', onClose);
-  },
-  loading(content, duration, onClose) {
-    return notice(content, duration, 'loading', onClose);
-  },
+  ...methods,
   clear() {
     createMessageInstance();
   },
@@ -86,8 +87,10 @@ module.exports = {
       prefixCls = options.prefixCls || prefixCls;
       transitionName = options.transitionName || transitionName;
       className = options.className || className;
-      multipleInstance = options.multipleInstance !== false;
+      multipleInstance = options.multipleInstance === undefined
+        ? multipleInstance : options.multipleInstance;
       getContainer = options.getContainer;
+      size = options.size || size;
     }
   },
 };
