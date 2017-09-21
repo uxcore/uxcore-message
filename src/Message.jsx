@@ -17,6 +17,7 @@ function createMessageInstance() {
   if (messageInstance && messageInstance.destroy) {
     messageInstance.destroy();
   }
+
   messageInstance = Notification.newInstance({
     prefixCls,
     className,
@@ -29,12 +30,29 @@ function createMessageInstance() {
   return messageInstance;
 }
 
+function incrementCounter() {
+  if (multipleInstance) {
+    messageCounter += 1
+  }
+}
+
+function decrementCounter() {
+  if (multipleInstance) {
+    messageCounter = Math.max(messageCounter - 1, 0)
+  }
+}
+
 function tryRemoveMessageInstance() {
+  if (!multipleInstance || messageCounter) {
+    return false;
+  }
+
   if (messageInstance && messageInstance.destroy) {
     messageInstance.destroy()
     messageInstance = null
   }
 }
+
 
 function notice(content, duration = defaultDuration, type, onClose) {
   const options = typeof content === 'object' ? content : null;
@@ -48,7 +66,7 @@ function notice(content, duration = defaultDuration, type, onClose) {
   const instance = (multipleInstance && messageInstance)
     ? messageInstance : createMessageInstance(options);
 
-  messageCounter += 1
+  incrementCounter()
 
   instance.notice({
     key,
@@ -71,16 +89,13 @@ function notice(content, duration = defaultDuration, type, onClose) {
       </div>
     ),
     onClose: function() {
-      messageCounter = Math.max(messageCounter - 1, 0)
-
       // see https://github.com/uxcore/uxcore-message/issues/17
-      if (messageCounter === 0) {
-        tryRemoveMessageInstance()
-      }
+      decrementCounter()
+      tryRemoveMessageInstance()
 
-      const fn = (options && options.onClose) || onClose || function() {}
+      const callback = (options && options.onClose) || onClose || function() {}
 
-      fn.apply(null, [].slice(arguments))
+      callback.apply(null, [].slice(arguments))
     },
   });
   return (function () {
