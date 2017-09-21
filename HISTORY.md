@@ -1,4 +1,8 @@
 
+# 0.5.0
+
+* `ADD` a counter of instance. the container will be removed if this counter is equal to 0.
+
 # 0.4.0
 
 * `CHANGED` new icon 
@@ -13,33 +17,33 @@
 
 # 0.3.0
 
-`CHANGED` new animation
+* `CHANGED` new animation
 
 # 0.2.6
 
-`CHANGED` change `z-index` to 1070
+* `CHANGED` change `z-index` to 1070
 
 # 0.2.5
 
-`FIXED` missing react import
-`CHANGED` new scaffold
+* `FIXED` missing react import
+* `CHANGED` new scaffold
 
 # 0.2.4
 
-`CHANGED` update dependency `uxcore-kuma` & `kuma-base`
+* `CHANGED` update dependency `uxcore-kuma` & `kuma-base`
 
 # 0.2.3
 
-`CHANGED` change the default layout
+* `CHANGED` change the default layout
 
 # 0.2.2
 
-`CHANGED` change default transitionName 
+* `CHANGED` change default transitionName 
 
 # 0.2.0
 
-`CHANGED` apply new style
+* `CHANGED` apply new style
 
 # 0.1.2
 
-`CHANGED` update scaffold
+* `CHANGED` update scaffold
