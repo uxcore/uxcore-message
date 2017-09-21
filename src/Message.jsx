@@ -11,11 +11,13 @@ let className;
 let getContainer;
 let multipleInstance = true;
 let size = 'small';
+let messageCounter = 0
 
 function createMessageInstance() {
   if (messageInstance && messageInstance.destroy) {
     messageInstance.destroy();
   }
+
   messageInstance = Notification.newInstance({
     prefixCls,
     className,
@@ -28,6 +30,30 @@ function createMessageInstance() {
   return messageInstance;
 }
 
+function incrementCounter() {
+  if (multipleInstance) {
+    messageCounter += 1
+  }
+}
+
+function decrementCounter() {
+  if (multipleInstance) {
+    messageCounter = Math.max(messageCounter - 1, 0)
+  }
+}
+
+function tryRemoveMessageInstance() {
+  if (!multipleInstance || messageCounter) {
+    return false;
+  }
+
+  if (messageInstance && messageInstance.destroy) {
+    messageInstance.destroy()
+    messageInstance = null
+  }
+}
+
+
 function notice(content, duration = defaultDuration, type, onClose) {
   const options = typeof content === 'object' ? content : null;
   const iconClass = ({
@@ -39,6 +65,9 @@ function notice(content, duration = defaultDuration, type, onClose) {
   })[type];
   const instance = (multipleInstance && messageInstance)
     ? messageInstance : createMessageInstance(options);
+
+  incrementCounter()
+
   instance.notice({
     key,
     duration: options ? options.duration : duration,
@@ -59,7 +88,15 @@ function notice(content, duration = defaultDuration, type, onClose) {
         </div>
       </div>
     ),
-    onClose: options ? options.onClose : onClose,
+    onClose: function() {
+      // see https://github.com/uxcore/uxcore-message/issues/17
+      decrementCounter()
+      tryRemoveMessageInstance()
+
+      const callback = (options && options.onClose) || onClose || function() {}
+
+      callback.apply(null, [].slice(arguments))
+    },
   });
   return (function () {
     const target = key;
