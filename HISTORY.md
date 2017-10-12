@@ -1,4 +1,4 @@
-# 0.6.0
+# 0.5.1
 
 * `CHANGED` to React 15.x
 
