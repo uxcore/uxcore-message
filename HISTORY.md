@@ -1,3 +1,6 @@
+# 0.6.0
+
+* `CHANGED` to React 15.x
 
 # 0.5.0
 

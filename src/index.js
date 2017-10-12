@@ -6,4 +6,4 @@
  * All rights reserved.
  */
 
-module.exports = require('./Message');
+export default from './Message';

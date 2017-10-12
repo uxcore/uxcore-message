@@ -6,5 +6,5 @@
  * All rights reserved.
  */
 
- var Demo = require('./MessageDemo');
+ import Demo from './MessageDemo';
  ReactDOM.render(<Demo/>, document.getElementById('UXCoreDemo'));

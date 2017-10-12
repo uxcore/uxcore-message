@@ -1,6 +1,6 @@
-const Notification = require('rc-notification');
-const classnames = require('classnames');
-const React = require('react');
+import React from 'react';
+import classnames from 'classnames';
+import Notification from 'rc-notification';
 
 const defaultDuration = 1.5;
 let messageInstance;
@@ -114,7 +114,7 @@ const methods = {};
     notice(content, duration, item, onClose);
 });
 
-module.exports = {
+export default {
   ...methods,
   clear() {
     createMessageInstance();
