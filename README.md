@@ -26,7 +26,7 @@ http://uxcore.github.io/
 * Message.error(content, duration, onClose)
 * Message.info(content, duration, onClose)
 * Message.loading(content, duration, onClose)
-* Message.clear() // 清楚所有的 message。
+* Message.clear() // 清除所有的 message。
 
 ### 也可以这样进行传参
 
