@@ -1,3 +1,5 @@
+# 0.6.0
+* `CHANGED` dependencies `rc-notification` to `~3.0.0`
 # 0.5.1
 
 * `CHANGED` to React 15.x

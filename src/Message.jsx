@@ -11,7 +11,7 @@ let className;
 let getContainer;
 let multipleInstance = true;
 let size = 'small';
-let messageCounter = 0
+let messageCounter = 0;
 
 function createMessageInstance() {
   if (messageInstance && messageInstance.destroy) {
@@ -32,27 +32,26 @@ function createMessageInstance() {
 
 function incrementCounter() {
   if (multipleInstance) {
-    messageCounter += 1
+    messageCounter += 1;
   }
 }
 
 function decrementCounter() {
   if (multipleInstance) {
-    messageCounter = Math.max(messageCounter - 1, 0)
+    messageCounter = Math.max(messageCounter - 1, 0);
   }
 }
 
 function tryRemoveMessageInstance() {
   if (!multipleInstance || messageCounter) {
-    return false;
+    return;
   }
 
   if (messageInstance && messageInstance.destroy) {
-    messageInstance.destroy()
-    messageInstance = null
+    messageInstance.destroy();
+    messageInstance = null;
   }
 }
-
 
 function notice(content, duration = defaultDuration, type, onClose) {
   const options = typeof content === 'object' ? content : null;
@@ -66,7 +65,7 @@ function notice(content, duration = defaultDuration, type, onClose) {
   const instance = (multipleInstance && messageInstance)
     ? messageInstance : createMessageInstance(options);
 
-  incrementCounter()
+  incrementCounter();
 
   instance.notice({
     key,
@@ -88,22 +87,21 @@ function notice(content, duration = defaultDuration, type, onClose) {
         </div>
       </div>
     ),
-    onClose: function() {
+    onClose(...params) {
       // see https://github.com/uxcore/uxcore-message/issues/17
-      decrementCounter()
-      tryRemoveMessageInstance()
+      decrementCounter();
+      tryRemoveMessageInstance();
 
-      const callback = (options && options.onClose) || onClose || function() {}
+      const callback = (options && options.onClose) || onClose || function noop() { };
 
-      callback.apply(null, [].slice(arguments))
+      callback(...params);
     },
   });
-  return (function () {
+
+  return (function removeNotice() {
     const target = key;
     key += 1;
-    return function () {
-      instance.removeNotice(target);
-    };
+    return () => instance.removeNotice(target);
   }());
 }
 
