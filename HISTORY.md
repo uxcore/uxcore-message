@@ -1,5 +1,7 @@
 # 0.6.0
 * `CHANGED` dependencies `rc-notification` to `~3.0.0`
+* `FIXED`  content can be a  React.Element.  
+
 # 0.5.1
 
 * `CHANGED` to React 15.x
