@@ -54,7 +54,7 @@ function tryRemoveMessageInstance() {
 }
 
 function notice(content, duration = defaultDuration, type, onClose) {
-  const options = typeof content === 'object' ? content : null;
+  const options = content && content.content ? content : null;
   const iconClass = ({
     info: 'uxcore-icon uxicon-tishi-full',
     success: 'uxcore-icon uxicon-chenggong-full',
