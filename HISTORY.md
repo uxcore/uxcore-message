@@ -1,3 +1,6 @@
+# 0.5.3
+* `FIXED` downgrade `rc-notification` to `1.4.0` to fix issue #22
+
 # 0.5.2
 * `CHANGED` dependencies `rc-notification` to `~3.0.0`
 * `FIXED`  content can be a  React.Element.  
