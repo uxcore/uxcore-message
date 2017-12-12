@@ -1,4 +1,4 @@
-# 0.6.0
+# 0.5.2
 * `CHANGED` dependencies `rc-notification` to `~3.0.0`
 * `FIXED`  content can be a  React.Element.  
 

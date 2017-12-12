@@ -6,4 +6,6 @@
  * All rights reserved.
  */
 
-export default from './Message';
+import Message from './Message';
+
+export default Message;

@@ -42,7 +42,17 @@ class Demo extends React.Component {
         <Button onClick={me.handleClick.bind(me, 'info')}>显示普通提示</Button>
         <Button onClick={me.handleClick.bind(me, 'loading')}>显示加载提示</Button>
         <Button onClick={me.handleClick.bind(me, 'nw_loading')}>显示信息平台加载提示</Button>
-        <Button onClick={() => { Message.success({ content: '20:32 已成功保存草稿', duration: 30, className: 'kuma-message-small' }); }}>显示小提示</Button>
+        <Button
+          onClick={() => {
+            Message.success({
+              content: '20:32 已成功保存草稿',
+              duration: 30,
+              className: 'kuma-message-small',
+            });
+          }}
+        >
+          显示小提示
+        </Button>
         <Button onClick={me.handleClick.bind(me, 'clear')}>清除</Button>
       </div>
     );
