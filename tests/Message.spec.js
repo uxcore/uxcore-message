@@ -77,4 +77,4 @@ describe('Message', () => {
         expect(instance.length === 0).to.be(true);
         done();
     })
-});
+}); 

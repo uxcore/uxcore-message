@@ -22,7 +22,7 @@
     "tnpm-update": "uxcore-tools run tnpm-update"
   },
   "bugs": {
-    "url": "http://github.com/uxcore/uxcore-message/issues"
+    "url": "http://github.com/uxcore/uxcore-message/issues" 
   },
   "keywords": [
     "react",
