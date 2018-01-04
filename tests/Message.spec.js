@@ -1,6 +1,7 @@
 import expect from 'expect.js';
 import React, { Component } from 'react';
 import ReactDOM, { render } from 'react-dom';
+import TestUtils from 'react-dom/test-utils';
 //import TestUtils, { Simulate } from 'react-addons-test-utils';
 import Message from '../src';
 
@@ -19,8 +20,34 @@ describe('Message', () => {
             return container;
         },
         prefixCls: 'uxcore-message',
-        multipleInstance: false,
-        onClose: () => true,
+        multipleInstance: true,
+    })
+
+    it('should work with multi instance', done => {
+        Message['info']({
+            content: 'this is first msg',
+            className: 'multi',
+        });
+        Message['info']({
+            content: 'this is second msg',
+            className: 'multi',
+        });
+        instance = $$('.multi');
+        expect(instance.length).to.be(2);
+        done();
+    })
+
+    it('should call the close callback', done => {
+        let _call = Message['info']({
+            content: 'this is a msg with a close callback',
+            className: 'close',
+            duration: 1,
+            onClose: () => 'closed',
+        })
+        setTimeout(() => {
+            expect(_call).to.be('closed');
+        }, 1000);
+        done();
     })
 
     it('show the different msg by the type', done => {
