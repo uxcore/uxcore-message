@@ -20,15 +20,15 @@ describe('Message', () => {
             return container;
         },
         prefixCls: 'uxcore-message',
-        multipleInstance: true,
+        multipleInstance: true
     })
 
     it('should work with multi instance', done => {
-        Message['info']({
+        Message.info({
             content: 'this is first msg',
             className: 'multi',
         });
-        Message['info']({
+        Message.success({
             content: 'this is second msg',
             className: 'multi',
         });
@@ -38,14 +38,19 @@ describe('Message', () => {
     })
 
     it('should call the close callback', done => {
-        let _call = Message['info']({
-            content: 'this is a msg with a close callback',
-            className: 'close',
-            duration: 1,
-            onClose: () => 'closed',
-        })
-        setTimeout(() => {
-            expect(_call).to.be('closed');
+        let timer = setInterval(() => console.log('closed'),1000)
+        let msg = Message['info']({
+            content: "this is a msg with a close callback", 
+            duration: 1, 
+            onClose: () => {
+                clearInterval(timer);
+                timer = null;
+                
+            }
+        });
+        msg();
+        setTimeout(() => { 
+            expect(timer).to.be(null);
         }, 1000);
         done();
     })
