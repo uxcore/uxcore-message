@@ -1,112 +1,121 @@
+
 import expect from 'expect.js';
-import React, { Component } from 'react';
-import ReactDOM, { render } from 'react-dom';
-import TestUtils from 'react-dom/test-utils';
-//import TestUtils, { Simulate } from 'react-addons-test-utils';
+import React from 'react'; // eslint-disable-line
+import ReactDOM from 'react-dom'; // eslint-disable-line
 import Message from '../src';
 
 describe('Message', () => {
+  const $$ = selector => document.querySelectorAll(selector);
 
-    let instance;
+  Message.config({
+    getContainer: () => {
+      const container = document.createElement('div');
+      container.className = 'uxcore-message';
+      document.body.appendChild(container);
+      return container;
+    },
+    prefixCls: 'uxcore-message',
+    multipleInstance: true,
+  });
 
-    let $ = selector => document.querySelector(selector);
-    let $$ = selector => document.querySelectorAll(selector);
+  it('should work with multi instance', (done) => {
+    Message.info({
+      content: 'this is first msg',
+      className: 'multi',
+    });
+    Message.success({
+      content: 'this is second msg',
+      className: 'multi',
+    });
+    expect($$('.multi').length).to.be(2);
+    done();
+  });
 
-    Message.config({
-        getContainer: () => {
-            const container = document.createElement('div');
-            container.className = 'uxcore-message';
-            document.body.appendChild(container);
-            return container;
-        },
-        prefixCls: 'uxcore-message',
-        multipleInstance: true
-    })
+  it('should call the close callback', (done) => {
+    let closed = false;
+    Message.success({
+      content: 'this is second msg',
+      className: 'multi',
+      duration: 0.5,
+      onClose: () => {
+        closed = true;
+      },
+    });
+    setTimeout(() => {
+      expect(closed).to.be(true);
+      done();
+    }, 1000);
+  });
 
-    it('should work with multi instance', done => {
-        Message.info({
-            content: 'this is first msg',
-            className: 'multi',
-        });
-        Message.success({
-            content: 'this is second msg',
-            className: 'multi',
-        });
-        instance = $$('.multi');
-        expect(instance.length).to.be(2);
-        done();
-    })
+  it('show responed to different msg type', (done) => {
+    const typeArr = [
+      'info',
+      'success',
+      'error',
+      'loading',
+      'nw_loading',
+    ];
+    const iconArr = [
+      'uxcore-icon uxicon-tishi-full',
+      'uxcore-icon uxicon-chenggong-full',
+      'uxcore-icon uxicon-biaodanlei-tongyongqingchu',
+      'uxcore-icon uxicon-loading-icon-round',
+      'kuma-loading',
+    ];
+    typeArr.forEach((type) => {
+      Message[type]({
+        content: `this is a ${type} msg`,
+      });
+    });
 
-    it('should call the close callback', done => {
-        let timer = setInterval(() => console.log('closed'),1000)
-        let msg = Message['info']({
-            content: "this is a msg with a close callback", 
-            duration: 1, 
-            onClose: () => {
-                clearInterval(timer);
-                timer = null;
-                
-            }
-        });
-        msg();
-        setTimeout(() => { 
-            expect(timer).to.be(null);
-        }, 1000);
-        done();
-    })
+    const instances = Array.prototype.slice.call($$('.uxcore-icon'));
+    const matched = instances.filter(item =>
+      iconArr.indexOf(item.getAttribute('class')) !== -1,
+    );
+    expect(matched.length).to.be(instances.length);
+    done();
+  });
 
-    it('show the different msg by the type', done => {
-        let typeArr = ['info', 'success', 'error', 'loading', 'nw_loading'];
-        let iconArr = ['uxcore-icon uxicon-tishi-full', 'uxcore-icon uxicon-chenggong-full', 'uxcore-icon uxicon-biaodanlei-tongyongqingchu', 'uxcore-icon uxicon-loading-icon-round', 'kuma-loading'];
-        typeArr.forEach(type => {
-            Message[type]({
-                content: `this is a ${type} msg`,
-                className: 'type',
-            });
-        });
-        instance = $$('.uxcore-icon');
-        expect(
-            Array.prototype.every.call(instance, item => {
-                return ~iconArr.indexOf(item.getAttribute('class'));
-            })
-        ).to.be(true);
-        done();
-    })
+  it('show the msg over duration', (done) => {
+    Message.info({
+      content: 'this is a msg over duration 1(1000ms)',
+      duration: 0.5,
+      className: 'duration-test',
+    });
+    setTimeout(() => {
+      expect($$('.duration-test').length).to.be(0);
+      done();
+    }, 1000);
+  });
 
-    it('show the msg over time', done => {
-        let isExist, isDie;
-        Message['info']({
-            content: 'this is a msg over time', 
-            duration: 5,
-            className: 'time'
-        });
-        instance = $('.time');
-        isExist = instance !== null;
-        setTimeout(() => {
-            isDie = instance === null;
-            expect(isExist && isDie).to.be(true);
-        }, 5000);
-        done();
-    })
+  it('should apply the custom prefixCls', (done) => {
+    Message.info({
+      content: 'this is a msg',
+    });
+    expect($$('.uxcore-message-content').length).to.be.greaterThan(0);
+    done();
+  });
 
-    it('should apply the custom prefixCls', done => {
-        instance = $$('.uxcore-message-content');
-        expect(instance.length > 0).to.be(true);
-        done();
-    })
+  it('should render into the appointed container', (done) => {
+    Message.info({
+      content: 'this is a msg',
+      className: 'appointed-container',
+    });
+    expect($$('.uxcore-message .appointed-container').length).to.be(1);
+    done();
+  });
 
-    it('should into the appoint container', done => {
-        instance = $('.uxcore-message');
-        expect(instance !== null).to.be(true);
-        done();
-    })
-
-    it('clear the msg', done => {
-        Message['clear']({
-            content: 'cleared',
-        })
-        instance = $$('.uxcore-message-notice')
-        expect(instance.length === 0).to.be(true);
-        done();
-    })
-}); 
+  it('should the message be cleared', (done) => {
+    Message.info({
+      content: 'this is a info meesage',
+    });
+    Message.error({
+      content: 'this is a error meesage',
+    });
+    Message.clear({
+      content: 'cleared',
+    });
+    expect($$('.uxcore-message-notice').length).to.be(0);
+    done();
+  });
+});
