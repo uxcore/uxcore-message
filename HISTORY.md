@@ -1,9 +1,11 @@
+# 0.5.4
+* `CHANGED` to React 16.x
 # 0.5.3
 * `FIXED` downgrade `rc-notification` to `1.4.0` to fix issue #22
 
 # 0.5.2
 * `CHANGED` dependencies `rc-notification` to `~3.0.0`
-* `FIXED`  content can be a  React.Element.  
+* `FIXED`  content can be a  React.Element.
 
 # 0.5.1
 
@@ -15,7 +17,7 @@
 
 # 0.4.0
 
-* `CHANGED` new icon 
+* `CHANGED` new icon
 * `CHANGED` support small size
 * `CHANGED` a new way to pass instance options
 
@@ -48,7 +50,7 @@
 
 # 0.2.2
 
-* `CHANGED` change default transitionName 
+* `CHANGED` change default transitionName
 
 # 0.2.0
 
