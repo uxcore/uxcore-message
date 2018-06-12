@@ -22,7 +22,7 @@
     "tnpm-update": "uxcore-tools run tnpm-update"
   },
   "bugs": {
-    "url": "http://github.com/uxcore/uxcore-message/issues" 
+    "url": "http://github.com/uxcore/uxcore-message/issues"
   },
   "keywords": [
     "react",
@@ -34,22 +34,22 @@
   "devDependencies": {
     "console-polyfill": "^0.2.2",
     "enzyme": "^3.0.0",
-    "enzyme-adapter-react-15": "^1.0.0",
-    "es5-shim": "^4.5.8",
     "expect.js": "~0.3.1",
     "kuma-base": "1.x",
-    "react": "15.x",
-    "react-dom": "15.x",
-    "react-test-renderer": "15.x",
-    "uxcore-button": "~0.3.2",
+    "react": "16.x",
+    "react-dom": "16.x",
+    "react-test-renderer": "16.x",
+    "uxcore-button": "*",
     "uxcore-kuma": "*",
-    "uxcore-tools": "0.2.x"
+    "uxcore-tools": "0.2.x",
+    "babel-polyfill": "6.x",
+    "enzyme-adapter-react-16": "1.x"
   },
   "dependencies": {
     "classnames": "^2.1.2",
     "object-assign": "^4.0.0",
     "prop-types": "15.x",
-    "rc-notification": "^1.4.0"
+    "rc-notification": "^3.1.1"
   },
   "contributors": [],
   "license": "MIT"
