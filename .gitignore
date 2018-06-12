@@ -28,3 +28,5 @@ dist
 build
 assets/**/*.css
 npm-debug.log.*
+coverage
+package-lock.json
