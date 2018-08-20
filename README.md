@@ -1,6 +1,6 @@
 ---
 
-## uxcore-message [![Dependency Status](http://img.shields.io/david/uxcore/uxcore-message.svg?style=flat-square)](https://david-dm.org/uxcore/uxcore-message) [![devDependency Status](http://img.shields.io/david/dev/uxcore/uxcore-message.svg?style=flat-square)](https://david-dm.org/uxcore/uxcore-message#info=devDependencies) 
+## uxcore-message [![Dependency Status](http://img.shields.io/david/uxcore/uxcore-message.svg?style=flat-square)](https://david-dm.org/uxcore/uxcore-message) [![devDependency Status](http://img.shields.io/david/dev/uxcore/uxcore-message.svg?style=flat-square)](https://david-dm.org/uxcore/uxcore-message#info=devDependencies)
 
 ## TL;DR
 
@@ -26,6 +26,7 @@ http://uxcore.github.io/
 * Message.error(content, duration, onClose)
 * Message.info(content, duration, onClose)
 * Message.loading(content, duration, onClose)
+* Message.mask_loading(content, duration, onClose) // 带遮罩全局的 loading，防止重复点击提交，duration=0代表不会消失，必须使用Message.clear()清除
 * Message.clear() // 清除所有的 message。
 
 ### 也可以这样进行传参
@@ -45,7 +46,7 @@ Message.success({
 |duration|Number|optional|1.5|多长(秒)时间消失|
 |getContainer|function|optional| - | 为 message 指定要渲染的容器 |
 
-另外提供了一个全局方法用于配置 
+另外提供了一个全局方法用于配置
 
 ```js
 Message.config({
