@@ -80,7 +80,18 @@ function notice(content, duration = defaultDuration, type, onClose) {
   };
   if (isLoadingType) {
     activeStyle = {
-      right: '0',
+      right: '50%',
+      width: '100vw',
+      position: 'fixed',
+      maxWidth: '100vw',
+      height: ' 100vh',
+      margin: '0',
+      top: 0,
+      left: '0',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      background: 'rgba(0, 0, 0, 0.2)',
     };
   }
 

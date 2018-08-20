@@ -27,7 +27,7 @@ class Demo extends React.Component {
   }
 
   handleClick(type) {
-    Message[type](type, 3);
+    Message[type](type, 300);
   }
 
   render() {
