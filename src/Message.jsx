@@ -75,11 +75,12 @@ function notice(content, duration = defaultDuration, type, onClose) {
   const instance = multipleInstance && messageInstance ? messageInstance : createMessageInstance(options);
 
   incrementCounter();
-  let activeStyle = {
+  let activeWrapStyle = {
     right: '50%',
   };
+  let activeContentStyle = {};
   if (isLoadingType) {
-    activeStyle = {
+    activeWrapStyle = {
       right: '50%',
       width: '100vw',
       position: 'fixed',
@@ -93,19 +94,21 @@ function notice(content, duration = defaultDuration, type, onClose) {
       alignItems: 'center',
       background: 'rgba(0, 0, 0, 0.2)',
     };
+    activeContentStyle = { padding: '23px 38px', backgroundColor: '#fff' };
   }
 
   instance.notice({
     key,
     duration: options ? options.duration : duration,
     className: options ? options.className : null,
-    style: activeStyle,
+    style: activeWrapStyle,
     content: (
       <div
         className={classnames({
           [`${prefixCls}-container ${prefixCls}-container-${type}`]: true,
           'fn-clear': true,
         })}
+        style={activeContentStyle}
       >
         <i className={iconClass} />
         <div className={`${prefixCls}-content`}>{options ? options.content : content}</div>
