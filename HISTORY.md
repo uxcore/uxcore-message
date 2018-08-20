@@ -1,17 +1,5 @@
-# 0.5.9
-* `FIXED` to Message.clear function error and `ADD` new API Message.mask_loading
-
-# 0.5.8
-* `FIXED` new API Message.mask_loading error
-
-# 0.5.7
-* `FIXED`  API Message.mask_loading zIndex
-
-# 0.5.6
-* `ADD` new API Message.mask_loading
-
 # 0.5.5
-* `FIXED` to Message.clear function error
+* `FIXED` to Message.clear function error and `ADD` new API Message.mask_loading
 # 0.5.4
 * `CHANGED` to React 16.x
 # 0.5.3
