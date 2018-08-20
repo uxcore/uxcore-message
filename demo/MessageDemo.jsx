@@ -28,12 +28,6 @@ class Demo extends React.Component {
 
   handleClick(type) {
     Message[type](type, 3);
-    if(type='mask_loading'){
-      setTimeout(() => {
-      Message.clear();
-    }, 2000);
-    }
-
   }
 
   render() {

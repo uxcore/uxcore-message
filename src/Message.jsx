@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import Notification from 'rc-notification';
 
 const defaultDuration = 1.5;
-const bodyBackgroundColor = document.body.style.backgroundColor;
 let messageInstance;
 let key = 1;
 let prefixCls = 'kuma-message';
@@ -17,7 +16,6 @@ let messageCounter = 0;
 function createMessageInstance() {
   if (messageInstance && messageInstance.destroy) {
     messageInstance.destroy();
-    document.body.style.backgroundColor = bodyBackgroundColor;
   }
   let notification = null;
   Notification.newInstance(
@@ -59,13 +57,12 @@ function tryRemoveMessageInstance() {
   if (messageInstance && messageInstance.destroy) {
     messageInstance.destroy();
     messageInstance = null;
-    document.body.style.backgroundColor = bodyBackgroundColor;
   }
 }
 
 function notice(content, duration = defaultDuration, type, onClose) {
   const options = content && content.content ? content : null;
-  const isFullLoadingType = type === 'mask_loading';
+  const isLoadingType = type === 'mask_loading';
   const iconClass = {
     info: 'uxcore-icon uxicon-tishi-full',
     success: 'uxcore-icon uxicon-chenggong-full',
@@ -81,11 +78,9 @@ function notice(content, duration = defaultDuration, type, onClose) {
   let activeStyle = {
     right: '50%',
   };
-  if (isFullLoadingType) {
-    document.body.style.background = 'rgba(0,0,0,0.2)';
+  if (isLoadingType) {
     activeStyle = {
-      right: '50%',
-      padding: 0,
+      right: '0',
     };
   }
 
@@ -95,16 +90,14 @@ function notice(content, duration = defaultDuration, type, onClose) {
     className: options ? options.className : null,
     style: activeStyle,
     content: (
-      <div className={classnames({ [`${prefixCls}-mask_loading`]: isFullLoadingType })}>
-        <div
-          className={classnames({
-            [`${prefixCls}-container ${prefixCls}-container-${type}`]: true,
-            'fn-clear': true,
-          })}
-        >
-          <i className={iconClass} />
-          <div className={`${prefixCls}-content`}>{options ? options.content : content}</div>
-        </div>
+      <div
+        className={classnames({
+          [`${prefixCls}-container ${prefixCls}-container-${type}`]: true,
+          'fn-clear': true,
+        })}
+      >
+        <i className={iconClass} />
+        <div className={`${prefixCls}-content`}>{options ? options.content : content}</div>
       </div>
     ),
     onClose(...params) {
