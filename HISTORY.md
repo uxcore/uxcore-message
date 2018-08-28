@@ -1,5 +1,5 @@
 # 0.5.10
-* `FIXED` to Message.clear function error and `ADD` new API Message.mask_loading
+* `FIXED` to Message.clear function error and `NEW` API Message.mask_loading
 # 0.5.4
 * `CHANGED` to React 16.x
 # 0.5.3
