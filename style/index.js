@@ -1,0 +1,1 @@
+import '../src/Message.less';

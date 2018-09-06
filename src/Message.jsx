@@ -13,7 +13,7 @@ let multipleInstance = true;
 let size = 'small';
 let messageCounter = 0;
 
-function createMessageInstance() {
+function createMessageInstance(options, type) {
   if (messageInstance && messageInstance.destroy) {
     messageInstance.destroy();
   }
@@ -22,7 +22,7 @@ function createMessageInstance() {
     {
       prefixCls,
       className,
-      transitionName,
+      transitionName: type === 'mask_loading' ? '' : transitionName,
       getContainer,
       style: {
         left: '50%',
@@ -72,7 +72,9 @@ function notice(content, duration = defaultDuration, type, onClose) {
     nw_loading: 'kuma-loading',
   }[type];
 
-  const instance = multipleInstance && messageInstance ? messageInstance : createMessageInstance(options);
+  const instance = multipleInstance && messageInstance && type !== 'mask_loading'
+    ? messageInstance
+    : createMessageInstance(options, type);
 
   incrementCounter();
   let activeWrapStyle = {
@@ -85,10 +87,10 @@ function notice(content, duration = defaultDuration, type, onClose) {
       width: '100vw',
       position: 'fixed',
       maxWidth: '100vw',
-      height: ' 100vh',
-      margin: '0',
+      height: '100vh',
+      margin: 0,
       top: 0,
-      left: '0',
+      left: 0,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',

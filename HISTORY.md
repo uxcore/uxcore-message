@@ -1,3 +1,5 @@
+# 0.5.11
+`CHANGED` support js style export
 # 0.5.10
 * `FIXED` to Message.clear function error and `NEW` API Message.mask_loading
 # 0.5.4

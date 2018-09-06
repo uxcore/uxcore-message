@@ -26,6 +26,7 @@ http://uxcore.github.io/
 * Message.error(content, duration, onClose)
 * Message.info(content, duration, onClose)
 * Message.loading(content, duration, onClose)
+* Message.nw_loading(content, duration, onClose) // 信息平台新 logo 的 loading
 * Message.mask_loading(content, duration, onClose) // 带遮罩全局的 loading，防止重复点击提交，duration=0代表不会消失，必须使用Message.clear()清除
 * Message.clear() // 清除所有的 message。
 
