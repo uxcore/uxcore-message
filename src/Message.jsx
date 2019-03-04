@@ -137,9 +137,7 @@ function notice(content, duration = defaultDuration, type, onClose) {
 const methods = {};
 
 ['info', 'success', 'error', 'loading', 'mask_loading', 'nw_loading'].forEach((item) => {
-  methods[item] = (content, duration, onClose) => setTimeout(() => {
-    notice(content, duration, item, onClose);
-  }, 0);
+  methods[item] = (content, duration, onClose) => notice(content, duration, item, onClose);
 });
 
 export default {
