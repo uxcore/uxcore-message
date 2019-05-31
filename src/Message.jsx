@@ -143,9 +143,7 @@ const methods = {};
 export default {
   ...methods,
   clear() {
-    setTimeout(() => {
-      createMessageInstance();
-    }, 0);
+    createMessageInstance();
   },
   config(options) {
     if (options) {
