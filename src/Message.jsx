@@ -143,7 +143,11 @@ function notice(content, duration = defaultDuration, type, onClose) {
   return (function removeNotice() {
     const target = key;
     key += 1;
-    return () => messageInstance.removeNotice(target);
+    return () => {
+      if (messageInstance) {
+        messageInstance.removeNotice(target);
+      }
+    };
   }());
 }
 
