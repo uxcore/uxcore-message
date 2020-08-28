@@ -26,6 +26,10 @@ class Demo extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    Message.info('不应该出错');
+  }
+
   handleClick(type) {
     Message[type](type, 3);
     setTimeout(() => {
