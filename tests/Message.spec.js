@@ -10,7 +10,7 @@ describe('Message', () => {
   Message.config({
     getContainer: () => {
       const container = document.createElement('div');
-      container.className = 'uxcore-message';
+      container.className = 'test';
       document.body.appendChild(container);
       return container;
     },
@@ -27,8 +27,10 @@ describe('Message', () => {
       content: 'this is second msg',
       className: 'multi',
     });
-    expect($$('.multi').length).to.be(2);
-    done();
+    setTimeout(() => {
+      expect($$('.multi').length).to.be(2);
+      done();
+    }, 200);
   });
 
   it('should call the close callback', (done) => {
