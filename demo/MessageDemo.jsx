@@ -17,7 +17,7 @@ Message.config({
     document.body.appendChild(div);
     return div;
   },
-  // multipleInstance: false,
+  multipleInstance: false,
 });
 
 class Demo extends React.Component {
@@ -26,11 +26,18 @@ class Demo extends React.Component {
     this.state = {};
   }
 
+  componentWillMount() {
+    const hide = Message.mask_loading('loading', 10);
+    setTimeout(() => {
+      hide();
+    }, 3000);
+  }
+
   handleClick(type) {
     Message[type](type, 3);
-    setTimeout(() => {
-       Message.clear();
-    }, 1500);
+  //   setTimeout(() => {
+  //      Message.clear();
+  //   }, 1500);
   }
 
   render() {
