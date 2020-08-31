@@ -27,10 +27,8 @@ describe('Message', () => {
       content: 'this is second msg',
       className: 'multi',
     });
-    setTimeout(() => {
-      expect($$('.multi').length).to.be(2);
-      done();
-    }, 200);
+    expect($$('.multi').length).to.be(2);
+    done();
   });
 
   it('should call the close callback', (done) => {

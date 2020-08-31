@@ -17,27 +17,24 @@ function createMessageInstance(options, type) {
   if (messageInstance && messageInstance.destroy) {
     messageInstance.destroy();
   }
+  let notification = null;
+  Notification.newInstance(
+    {
+      prefixCls,
+      className,
+      transitionName: type === 'mask_loading' ? '' : transitionName,
+      getContainer,
+      style: {
+        left: '50%',
+      }, // 覆盖原来的样式
+    },
+    (n) => {
+      notification = n;
+      messageInstance = n;
+    },
+  );
 
-
-  return new Promise((resolve) => {
-    let notification = null;
-    Notification.newInstance(
-      {
-        prefixCls,
-        className,
-        transitionName: type === 'mask_loading' ? '' : transitionName,
-        getContainer,
-        style: {
-          left: '50%',
-        }, // 覆盖原来的样式
-      },
-      (n) => {
-        notification = n;
-        messageInstance = n;
-        resolve(notification);
-      },
-    );
-  });
+  return notification;
 }
 
 function incrementCounter() {
@@ -102,52 +99,38 @@ function notice(content, duration = defaultDuration, type, onClose) {
     activeContentStyle = { padding: '23px 38px', backgroundColor: '#fff' };
   }
 
-  const noticeFunc = (inst) => {
-    inst.notice({
-      key,
-      duration: options ? options.duration : duration,
-      className: options ? options.className : null,
-      style: activeWrapStyle,
-      content: (
-        <div
-          className={classnames({
-            [`${prefixCls}-container ${prefixCls}-container-${type}`]: true,
-            'fn-clear': true,
-          })}
-          style={activeContentStyle}
-        >
-          <i className={iconClass} />
-          <div className={`${prefixCls}-content`}>{options ? options.content : content}</div>
-        </div>
-      ),
-      onClose(...params) {
-        // see https://github.com/uxcore/uxcore-message/issues/17
-        decrementCounter();
-        tryRemoveMessageInstance();
+  instance.notice({
+    key,
+    duration: options ? options.duration : duration,
+    className: options ? options.className : null,
+    style: activeWrapStyle,
+    content: (
+      <div
+        className={classnames({
+          [`${prefixCls}-container ${prefixCls}-container-${type}`]: true,
+          'fn-clear': true,
+        })}
+        style={activeContentStyle}
+      >
+        <i className={iconClass} />
+        <div className={`${prefixCls}-content`}>{options ? options.content : content}</div>
+      </div>
+    ),
+    onClose(...params) {
+      // see https://github.com/uxcore/uxcore-message/issues/17
+      decrementCounter();
+      tryRemoveMessageInstance();
 
-        const callback = (options && options.onClose) || onClose || function noop() {};
+      const callback = (options && options.onClose) || onClose || function noop() {};
 
-        callback(...params);
-      },
-    });
-  };
-  if (instance.then) {
-    instance.then((inst) => {
-      noticeFunc(inst);
-    });
-  } else {
-    noticeFunc(instance);
-  }
-
+      callback(...params);
+    },
+  });
 
   return (function removeNotice() {
     const target = key;
     key += 1;
-    return () => {
-      if (messageInstance) {
-        messageInstance.removeNotice(target);
-      }
-    };
+    return () => instance.removeNotice(target);
   }());
 }
 

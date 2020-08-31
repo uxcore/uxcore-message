@@ -26,13 +26,6 @@ class Demo extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      Message.info('不应该出错');
-    Message.info('不应该出错');
-    }, 200)
-  }
-
   handleClick(type) {
     Message[type](type, 3);
     setTimeout(() => {
