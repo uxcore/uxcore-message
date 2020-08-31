@@ -27,8 +27,25 @@ describe('Message', () => {
       content: 'this is second msg',
       className: 'multi',
     });
-    expect($$('.multi').length).to.be(2);
-    done();
+    setTimeout(() => {
+      expect($$('.multi').length).to.be(2);
+      done();
+    });
+  });
+
+  it('should be able to close by returned handler', (done) => {
+    const hide = Message.mask_loading({
+      content: 'loading',
+      duration: 10,
+      className: 'handler-test',
+    });
+    setTimeout(() => {
+      hide();
+    }, 1000);
+    setTimeout(() => {
+      expect($$('.handler-test').length).to.be(0);
+      done();
+    }, 1500);
   });
 
   it('should call the close callback', (done) => {
@@ -69,9 +86,7 @@ describe('Message', () => {
     });
 
     const instances = Array.prototype.slice.call($$('.uxcore-icon'));
-    const matched = instances.filter(item =>
-      iconArr.indexOf(item.getAttribute('class')) !== -1,
-    );
+    const matched = instances.filter(item => iconArr.indexOf(item.getAttribute('class')) !== -1);
     expect(matched.length).to.be(instances.length);
     done();
   });
